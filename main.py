@@ -11,6 +11,7 @@ lista_materias = [Materia.from_dict(m, lista_profesores, lista_alumnos) for m in
 
 
 def input_fecha():
+    """Solicita una fecha de nacimiento al usuario y la devuelve como objeto date."""
     while True:
         try:
             fecha_str = input("Fecha de nacimiento (YYYY-MM-DD): ")
@@ -20,12 +21,14 @@ def input_fecha():
 
 
 def guardar_todo():
+    """Guarda todas las listas en sus respectivos archivos JSON."""
     guardar_json("alumnos.json", [a.to_dict() for a in lista_alumnos])
     guardar_json("profesores.json", [p.to_dict() for p in lista_profesores])
     guardar_json("materias.json", [m.to_dict() for m in lista_materias])
 
 
 def alta_alumno():
+    """Crea un nuevo alumno y lo agrega a la lista."""
     print("\n--- Alta de Alumno ---")
     nombre = input("Nombre: ")
     apellido = input("Apellido: ")
@@ -38,11 +41,13 @@ def alta_alumno():
     print("Alumno agregado.")
 
 def baja_alumno():
+    """Elimina un alumno de la lista a partir del DNI."""
     dni = input("DNI del alumno a eliminar: ")
     Alumno.eliminar(lista_alumnos, dni)
     guardar_todo()
 
 def modificar_alumno():
+    """Modifica los datos de un alumno ya existente."""
     dni = input("DNI del alumno a modificar: ")
     for a in lista_alumnos:
         if a.dni == dni:
@@ -55,6 +60,7 @@ def modificar_alumno():
     print("Alumno no encontrado.")
 
 def listar_alumnos():
+    """Lista todos los alumnos registrados."""
     if lista_alumnos:
         for a in lista_alumnos:
             a.mostrar_datos()
@@ -63,6 +69,7 @@ def listar_alumnos():
 
 
 def alta_profesor():
+    """Crea un nuevo profesor y lo agrega a la lista."""
     print("\n--- Alta de Profesor ---")
     nombre = input("Nombre: ")
     apellido = input("Apellido: ")
@@ -76,11 +83,13 @@ def alta_profesor():
     print("Profesor agregado.")
 
 def baja_profesor():
+    """Elimina un profesor de la lista a partir del DNI."""
     dni = input("DNI del profesor a eliminar: ")
     Profesor.eliminar(lista_profesores, dni)
     guardar_todo()
 
 def modificar_profesor():
+    """Modifica los datos de un profesor ya existente."""
     dni = input("DNI del profesor a modificar: ")
     for p in lista_profesores:
         if p.dni == dni:
@@ -95,6 +104,7 @@ def modificar_profesor():
     print("Profesor no encontrado.")
 
 def listar_profesores():
+    """Lista todos los alumnos registrados."""
     if lista_profesores:
         for p in lista_profesores:
             p.mostrar_datos()
@@ -103,6 +113,7 @@ def listar_profesores():
 
 
 def alta_materia():
+    """Crea una nueva materia y lo agrega a la lista."""
     print("\n--- Alta de Materia ---")
     nombre = input("Nombre de la materia: ")
     
@@ -138,11 +149,13 @@ def alta_materia():
     print("Materia agregada.")
 
 def baja_materia():
+    """Elimina una materia de la lista a partir del nombre."""
     nombre = input("Nombre de la materia a eliminar: ")
     Materia.eliminar(lista_materias, nombre)
     guardar_todo()
 
 def modificar_materia():
+    """Modifica los datos de una materia ya existente."""
     nombre = input("Nombre de la materia a modificar: ")
     for m in lista_materias:
         if m.nombre == nombre:
@@ -171,6 +184,7 @@ def modificar_materia():
     print("Materia no encontrada.")
 
 def listar_materias():
+    """Lista todos las materias registradas."""
     if lista_materias:
         for m in lista_materias:
             m.mostrar_datos()
@@ -179,6 +193,7 @@ def listar_materias():
 
 # ---------------------------------------------------------------------------- Menú principal --------------------------------------------------------------------------
 def menu():
+    """Muestra el menú principal del sistema y delega a submenús."""
     while True:
         print("\n=== MENÚ PRINCIPAL ===")
         print("1. ABM Alumnos")
@@ -199,6 +214,7 @@ def menu():
             print("Opción inválida.")
 
 def submenu_abm(nombre, alta, baja, modificar, listar):
+    """Submenú genérico para las operaciones de ABM."""
     while True:
         print(f"\n--- ABM {nombre.upper()} ---")
         print("1. Alta")
