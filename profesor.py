@@ -1,4 +1,5 @@
 from usuario import Usuario
+import datetime
 
 class Profesor(Usuario):
     def __init__(self, nombre, apellido, dni, fecha_nacimiento, materias_dictadas):
@@ -20,3 +21,19 @@ class Profesor(Usuario):
                 print(f"Profesor con DNI '{dni_a_eliminar}' fue eliminado.")
                 return
         print(f"No se encontró un profesor con DNI '{dni_a_eliminar}'.")
+
+
+
+    def to_dict(self):
+        return {
+            "nombre": self.nombre,
+            "apellido": self.apellido,
+            "dni": self.dni,
+            "fecha_nacimiento": self.fecha_nacimiento.isoformat(),
+            "materias_dictadas": self.materias_dictadas
+        }
+
+    @classmethod
+    def from_dict(cls, data):
+        fecha = datetime.date.fromisoformat(data["fecha_nacimiento"])
+        return cls(data["nombre"], data["apellido"], data["dni"], fecha, data["materias_dictadas"])

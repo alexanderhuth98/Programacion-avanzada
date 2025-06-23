@@ -1,0 +1,12 @@
+[
+    {
+        "nombre": "claudia",
+        "apellido": "simoni",
+        "dni": "20121135",
+        "fecha_nacimiento": "1968-03-12",
+        "materias_dictadas": [
+            "literatura",
+            "matematica"
+        ]
+    }
+]

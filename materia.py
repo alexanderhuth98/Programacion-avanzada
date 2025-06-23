@@ -50,3 +50,22 @@ class Materia:
                 print(f"Materia '{nombre_a_eliminar}' eliminada.")
                 return
         print(f"No se encontró una materia con nombre '{nombre_a_eliminar}'.")
+
+
+
+    def to_dict(self):
+        return {
+            "nombre": self.nombre,
+            "profesor_dni": self.profesor.dni if self.profesor else None,
+            "alumnos_dni": [a.dni for a in self._alumnos]
+        }
+
+    @classmethod
+    def from_dict(cls, data, lista_profesores, lista_alumnos):
+        profesor = next((p for p in lista_profesores if p.dni == data["profesor_dni"]), None)
+        materia = cls(data["nombre"], profesor)
+        for dni in data["alumnos_dni"]:
+            alumno = next((a for a in lista_alumnos if a.dni == dni), None)
+            if alumno:
+                materia.agregar_alumno(alumno)
+        return materia

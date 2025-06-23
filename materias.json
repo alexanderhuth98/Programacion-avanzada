@@ -1,0 +1,9 @@
+[
+    {
+        "nombre": "literatura",
+        "profesor_dni": "20121135",
+        "alumnos_dni": [
+            "41026767"
+        ]
+    }
+]
